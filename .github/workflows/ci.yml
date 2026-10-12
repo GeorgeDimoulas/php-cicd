@@ -65,3 +65,12 @@ jobs:
         with:
           name: app
           path: app.zip
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, iis-test]
+    steps:
+      - name: Say hello from the server
+        shell: powershell
+        run: hostname
