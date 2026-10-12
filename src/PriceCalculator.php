@@ -7,7 +7,7 @@ use InvalidArgumentException;
 
 class PriceCalculator
 {
-    public function withVat(float $net, float $vatRate = 0.20): float
+    public function withVat(float $net, float $vatRate = 0.24): float
     {
         // Fail loudly: a negative price is a bug in the caller, and returning 0 would hide it.
         if ($net < 0) {
