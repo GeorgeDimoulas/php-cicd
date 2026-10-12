@@ -40,3 +40,28 @@ jobs:
 
       - name: Run tests
         run: composer test
+
+  build:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+      
+      - name: Install production libraries only
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      - name: Make the zip
+        run: zip -r app.zip src vendor composer.json
+
+      - name: Upload the zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: app.zip
