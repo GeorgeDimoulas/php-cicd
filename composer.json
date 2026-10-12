@@ -1,0 +1,23 @@
+{
+    "name": "bosh/php-cicd",
+    "description": "Learning CI/CD",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Bosh\\PhpCicd\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "George Dimoulas",
+            "email": "dhmoulasgiorgos@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "php": ">=7.4",
+        "phpunit/phpunit": "^9.6"
+    },
+    "scripts": {
+        "test":"phpunit tests"
+    }
+}
