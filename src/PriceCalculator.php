@@ -18,4 +18,4 @@ class PriceCalculator
         return round($net * (1 + $vatRate), 2);
     }
 }
-// New version commit
+// New version commit #2
