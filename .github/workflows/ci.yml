@@ -8,6 +8,9 @@ on:
 
 jobs:
   test:
+    strategy:
+      matrix:
+        php: ['7.4', '8.2', '8.3']
     runs-on: ubuntu-latest
     steps:
       - name: Get the code
@@ -16,7 +19,7 @@ jobs:
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: ${{ matrix.php }}
 
       - name: Install libraries
         run: composer install --no-interaction --prefer-dist
