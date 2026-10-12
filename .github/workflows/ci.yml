@@ -71,6 +71,19 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: [self-hosted, iis-test]
     steps:
-      - name: Say hello from the server
+      - name: Download the zip
+        uses: actions/download-artifact@v4
+        with:
+          name: app
+          path: artifact
+
+      - name: Unzip into a new release folder
         shell: powershell
-        run: hostname
+        run: Expand-Archive -Path artifact\app.zip -DestinationPath C:\George_Deploy\cicd-lab\releases\${{ github.sha}} -Force
+
+      - name: Point current at the new release
+        shell: powershell
+        run: |
+          $link = 'C:\George_Deploy\cicd-lab\current'
+          if (Test-Path $link) { cmd /c rmdir $link }
+          New-Item -ItemType Junction -Path $link -Target "C:\George_Deploy\cicd-lab\releases\${{ github.sha }}"
