@@ -24,5 +24,8 @@ jobs:
       - name: Install libraries
         run: composer install --no-interaction --prefer-dist
 
+      - name: Security audit
+        run: composer audit
+
       - name: Run tests
         run: composer test
